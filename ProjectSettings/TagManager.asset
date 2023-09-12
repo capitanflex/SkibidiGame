@@ -3,7 +3,14 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Booster
+  - PropBot
+  - Obstacle
+  - CinemachineTarget
+  - SeekerBot
+  - Mob
+  - Desk
   layers:
   - Default
   - TransparentFX
@@ -11,7 +18,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Cell
   - 
   - 
   - 
