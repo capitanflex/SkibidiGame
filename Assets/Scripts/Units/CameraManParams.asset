@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10b31f50a0aba374d86176622b18ef1d, type: 3}
+  m_Name: CameraManParams
+  m_EditorClassIdentifier: 
+  healthPoint: 50
+  damage: 10
+  distanceAttack: 7
+  unitPrefab: {fileID: 6405059227190468947, guid: e906881f5b012344483e9d25b9df7e3c, type: 3}
+  bulletPrefab: {fileID: 8344123286979536892, guid: 6f4b5f2f051d2c845ab14819a6fbf0ea, type: 3}
