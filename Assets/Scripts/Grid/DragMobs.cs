@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class DragMobs : MonoBehaviour
 {
-   private GameObject _draggedObject;
+    private GameObject _draggedObject;
     private Cell _objectCell;
     private Camera _camera;
 
@@ -78,9 +78,20 @@ public class DragMobs : MonoBehaviour
     {
         var cell = GetCellAtPoint();
 
-        if (cell != null && cell.isFree)
+        if (cell != null)
         {
-            MoveObjectToCell(cell, true);
+            if (cell.isFree)
+            {
+                MoveObjectToCell(cell, true);
+            }
+            else if (!cell.isFree && cell.mob != _draggedObject)
+            {
+                CheckMobUpgrade(cell);
+            }
+            else
+            {
+                MoveObjectToCell(_objectCell, false);
+            }
         }
         else
         {
@@ -89,6 +100,29 @@ public class DragMobs : MonoBehaviour
 
         _draggedObject = null;
         Debug.Log("Object has been dropped");
+    }
+
+    private void CheckMobUpgrade(Cell cell)
+    {
+        MobInfo cellMobInfo = cell.mob.GetComponent<MobInfo>();
+        MobInfo draggedMobInfo = _draggedObject.GetComponent<MobInfo>();
+        
+        if (cellMobInfo.level == draggedMobInfo.level && cellMobInfo.mobType == draggedMobInfo.mobType)
+        {
+            var newMob =Instantiate(cellMobInfo.nextLevelPrefab, cell.mob.transform.position, Quaternion.identity);
+            
+            Destroy(cellMobInfo.gameObject);
+            cell.mob = newMob;
+            
+            Destroy(draggedMobInfo.gameObject);
+            _draggedObject = null;
+            _objectCell.isFree = true;
+            _objectCell.mob = null;
+        }
+        else
+        {
+            MoveObjectToCell(_objectCell, false);
+        }
     }
 
     private void MoveObjectToCell(Cell targetCell, bool isNewCell)
@@ -105,7 +139,8 @@ public class DragMobs : MonoBehaviour
         StartCoroutine(MoveObjectToPosition(0.2f, _draggedObject.transform, targetCell, () => _objectCell = null));
     }
 
-    private IEnumerator MoveObjectToPosition(float duration, Transform mob ,Cell targetCell, System.Action onMovementComplete = null)
+    private IEnumerator MoveObjectToPosition(float duration, Transform mob, Cell targetCell,
+        System.Action onMovementComplete = null)
     {
         float startTime = Time.time;
         float endTime = startTime + duration;
@@ -115,7 +150,7 @@ public class DragMobs : MonoBehaviour
         {
             float t = (Time.time - startTime) / duration;
 
-            
+
             mob.position = Vector3.Lerp(startPosition, centerOfCell, t);
             yield return null;
         }
