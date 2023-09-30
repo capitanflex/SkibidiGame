@@ -4,8 +4,13 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Enemy
-  - Alies
+  - Booster
+  - PropBot
+  - Obstacle
+  - CinemachineTarget
+  - SeekerBot
+  - Mob
+  - Desk
   layers:
   - Default
   - TransparentFX
@@ -13,6 +18,7 @@ TagManager:
   - 
   - Water
   - UI
+  - Cell
   - 
   - 
   - 
@@ -37,8 +43,7 @@ TagManager:
   - 
   - 
   - 
-  - Enemy
-  - Alies
+  - 
   m_SortingLayers:
   - name: Default
     uniqueID: 0
